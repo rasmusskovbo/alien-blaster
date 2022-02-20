@@ -335,6 +335,22 @@ PrefabInstance:
       propertyPath: padding
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 2528998927832680356, guid: e181f69975fd54fcebe76dba476e8f73, type: 3}
+      propertyPath: paddingTop
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2528998927832680356, guid: e181f69975fd54fcebe76dba476e8f73, type: 3}
+      propertyPath: paddingLeft
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2528998927832680356, guid: e181f69975fd54fcebe76dba476e8f73, type: 3}
+      propertyPath: paddingRight
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2528998927832680356, guid: e181f69975fd54fcebe76dba476e8f73, type: 3}
+      propertyPath: paddingBottom
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4630061069563060669, guid: e181f69975fd54fcebe76dba476e8f73, type: 3}
       propertyPath: m_RootOrder
       value: 2

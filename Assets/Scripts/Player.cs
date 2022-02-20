@@ -10,7 +10,10 @@ public class Player : MonoBehaviour
 {
     [Header("Player Movement")]
     [SerializeField] float moveSpeed;
-    [SerializeField] float padding;
+    [SerializeField] float paddingLeft;
+    [SerializeField] float paddingRight;
+    [SerializeField] float paddingBottom;
+    [SerializeField] float paddingTop;
     
     
     
@@ -39,8 +42,8 @@ public class Player : MonoBehaviour
         Vector3 delta = inputDirection * moveSpeed * Time.deltaTime;
         Vector2 newPosition = new Vector2();
         
-        newPosition.x = Mathf.Clamp(transform.position.x + delta.x, minBounds.x + padding, maxBounds.x - padding);
-        newPosition.y = Mathf.Clamp(transform.position.y + delta.y, minBounds.y + padding, maxBounds.y - padding);
+        newPosition.x = Mathf.Clamp(transform.position.x + delta.x, minBounds.x + paddingLeft, maxBounds.x - paddingRight);
+        newPosition.y = Mathf.Clamp(transform.position.y + delta.y, minBounds.y + paddingBottom, maxBounds.y - paddingTop);
         
         this.transform.position = newPosition;
     }
