@@ -80,6 +80,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 50
+  hitEffect: {fileID: 2082589674776648354, guid: a04f4cebd8c4a6448a6ed57fc7ba3a7e, type: 3}
+  applyCameraShake: 1
 --- !u!114 &2528998927832680356
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -113,6 +115,10 @@ MonoBehaviour:
   projectileSpeed: 12
   firingSpeed: 0.15
   projectileLifetime: 5
+  useAi: 0
+  minimumFiringSpeed: 1
+  maximumFiringSpeed: 3
+  firingSpeedVariance: 1
   isFiring: 0
 --- !u!50 &-6939549914499154991
 Rigidbody2D:

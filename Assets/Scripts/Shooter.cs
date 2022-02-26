@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class Shooter : MonoBehaviour
 {
@@ -18,8 +20,16 @@ public class Shooter : MonoBehaviour
     
     [HideInInspector]
     public bool isFiring = false;
-    private Coroutine firingCoroutine;
     
+    private Coroutine firingCoroutine;
+    private AudioPlayer _audioPlayer;
+
+    private void Awake()
+    {
+        _audioPlayer = FindObjectOfType<AudioPlayer>();
+    }
+
+
     void Start()
     {
         if (useAi) isFiring = true;
@@ -61,12 +71,16 @@ public class Shooter : MonoBehaviour
             
             Destroy(projectile, projectileLifetime);
             
+            
+            
             if (useAi)
             {
+                _audioPlayer.PlayEnemyShootingFX();
                 yield return new WaitForSeconds(GetRandomFiringRate());
             }
             else
             {
+                _audioPlayer.PlayShootingFX();
                 yield return new WaitForSeconds(firingSpeed);
             }
         }
