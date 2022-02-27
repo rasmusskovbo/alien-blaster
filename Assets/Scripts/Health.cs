@@ -4,16 +4,22 @@ using UnityEngine;
 public class Health : MonoBehaviour
 {
     [SerializeField] private int health = 50;
+    [SerializeField] private int maxHealth = 50;
+    [SerializeField] private int points = 10; // 2x amount of hits needed base
     [SerializeField] private ParticleSystem hitEffect;
     [SerializeField] private bool applyCameraShake;
     
     private CameraShake _cameraShake;
     private AudioPlayer _audioPlayer;
-
+    private ScoreKeeper _scoreKeeper;
+    private LevelManager _levelManager;
+    
     private void Awake()
     {
         _audioPlayer = FindObjectOfType<AudioPlayer>();
         _cameraShake = Camera.main.GetComponent<CameraShake>();
+        _scoreKeeper = FindObjectOfType<ScoreKeeper>();
+        _levelManager = FindObjectOfType<LevelManager>();
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -36,10 +42,20 @@ public class Health : MonoBehaviour
         
         if (health <= 0)
         {
-            PlayDestroySound();
+            ResolveDestroy();
             Destroy(gameObject);
         }
     }
+
+    public int GetHealth()
+    {
+        return health;
+    }
+    public int GetMaxHealth()
+    {
+        return maxHealth;
+    }
+    
 
     void PlayHitEffect()
     {
@@ -49,16 +65,18 @@ public class Health : MonoBehaviour
             Destroy(instance.gameObject, instance.main.duration + instance.main.startLifetime.constantMax);
         }
     }
-
-    void PlayDestroySound()
+    
+    void ResolveDestroy()
     {
         if (gameObject.tag.Equals("Enemy"))
         {
             _audioPlayer.PlayEnemyDestroySFX();
+            _scoreKeeper.ModifyScore(points);
         }
         else
         {
             _audioPlayer.PlayPlayerDestroySFX();
+            _levelManager.LoadGameOver();
         }
     }
 

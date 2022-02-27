@@ -22,11 +22,9 @@ public class SpriteScroller : MonoBehaviour
         {
             float offset = scrollSpeed * Time.deltaTime;
             transform.position = new Vector2(transform.position.x, transform.position.y - offset);
-            Debug.Log(transform.position.y);
         }
         else
         {
-            Debug.Log("Resetting position");
             transform.position = initialPosition;
         }
         

@@ -85,7 +85,7 @@ public class Shooter : MonoBehaviour
             }
         }
     }
-
+    
     float GetRandomFiringRate()
     {
         float randomFiringRate = Random.Range(

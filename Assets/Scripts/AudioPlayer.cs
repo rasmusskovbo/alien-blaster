@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class AudioPlayer : MonoBehaviour
@@ -14,6 +15,40 @@ public class AudioPlayer : MonoBehaviour
     [SerializeField] [Range(0f, 1f)] private float onHitVolume = 0.25f;
     [SerializeField] [Range(0f, 1f)] private float playerDestroyedVolume = 0.75f;
     [SerializeField] [Range(0f, 1f)] private float enemyDestroyedVolume = 0.25f;
+
+    // Static instancess version of Singleton pattern
+    private static AudioPlayer instance;
+    
+    private void Awake()
+    {
+        ManageSingleton();
+    }
+
+    void ManageSingleton()
+    {
+        /* Private Singleton pattern
+         * int instanceCount = FindObjectsOfType(GetType()).Length;
+         * if (instanceCount > 1)
+         */
+
+        if (instance != null)
+        {
+            gameObject.SetActive(false);
+            Destroy(gameObject);
+        }
+        else
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+    }
+
+    /* Used for Static version of Singleton pattern
+    public AudioPlayer GetInstance()
+    {
+        return instance;
+    }
+    */
 
     public void PlayShootingFX()
     {
