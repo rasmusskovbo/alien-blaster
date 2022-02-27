@@ -66,4 +66,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ecd1264483d3b38419b82829299ffd08, type: 2}
   timeBetweenWaves: 2
   isLooping: 1
-  delayBetweenExtraWaves: 60
+  delayBetweenExtraWaves: 10

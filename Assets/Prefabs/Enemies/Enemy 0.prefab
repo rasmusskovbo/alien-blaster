@@ -79,13 +79,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectilePrefab: {fileID: 433910048897111177, guid: 06721567883b64e2990052bd7e727bdf, type: 3}
+  boostProjectilePrefab: {fileID: 0}
   projectileSpeed: 8
   firingSpeed: 2
   projectileLifetime: 5
+  fastestFiringSpeed: 0.05
+  boostFireOffset: 0.3
   useAi: 1
-  minimumFiringSpeed: 1
-  maximumFiringSpeed: 3
-  firingSpeedVariance: 1
+  minimumFiringSpeed: 0.5
+  maximumFiringSpeed: 4
+  firingSpeedVariance: 2
   isFiring: 0
 --- !u!114 &7296847610677449826
 MonoBehaviour:

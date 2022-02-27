@@ -85,21 +85,27 @@ public class EnemySpawner : MonoBehaviour
 
     void IncreaseDifficulty()
     {
+        // Decrease time between all wave spawners
         if (timeBetweenWaves > 0)
         {
             timeBetweenWaves--;
             Mathf.Clamp(timeBetweenWaves, 0, Int32.MaxValue);
         }
         
-        if (delayBetweenExtraWaves >= 10)
+        // Increase frequency of extra wave spawners
+        if (delayBetweenExtraWaves > 10)
         {
             delayBetweenExtraWaves -= 10;
             Mathf.Clamp(delayBetweenExtraWaves, 0, Int32.MaxValue);
         }
-        else if (delayBetweenExtraWaves > 0)
+        else if (delayBetweenExtraWaves >= 1)
         {
             delayBetweenExtraWaves--;
             Mathf.Clamp(delayBetweenExtraWaves, 0, Int32.MaxValue);
         }
+
+        // Add wave spawner ever reset
+        StartCoroutine(SpawnIncreasinglyExtraWaves());
+        
     }
 }

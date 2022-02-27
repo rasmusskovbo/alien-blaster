@@ -94,7 +94,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: FR
-  value: 0.025
+  value: 0.035
 --- !u!1 &6618772675559863334
 GameObject:
   m_ObjectHideFlags: 0
