@@ -15,6 +15,11 @@ public class AudioPlayer : MonoBehaviour
     [SerializeField] [Range(0f, 1f)] private float onHitVolume = 0.25f;
     [SerializeField] [Range(0f, 1f)] private float playerDestroyedVolume = 0.75f;
     [SerializeField] [Range(0f, 1f)] private float enemyDestroyedVolume = 0.25f;
+    
+    [Header("Pickups")]
+    [SerializeField] private AudioClip pickupSFX;
+    [SerializeField] private AudioClip boostSFX;
+    [SerializeField] [Range(0f, 1f)] private float pickupSFXVolume = 0.25f;
 
     // Static instancess version of Singleton pattern
     private static AudioPlayer instance;
@@ -106,6 +111,30 @@ public class AudioPlayer : MonoBehaviour
                 enemyDestroyedSFX, 
                 Camera.main.transform.position, 
                 enemyDestroyedVolume
+            );
+        }
+    }
+
+    public void PlayPickupSFX()
+    {
+        if (pickupSFX != null)
+        {
+            AudioSource.PlayClipAtPoint(
+                pickupSFX, 
+                Camera.main.transform.position, 
+                pickupSFXVolume
+            );
+        }
+    }
+    
+    public void PlayBoostSFX()
+    {
+        if (boostSFX != null)
+        {
+            AudioSource.PlayClipAtPoint(
+                boostSFX, 
+                Camera.main.transform.position, 
+                pickupSFXVolume
             );
         }
     }

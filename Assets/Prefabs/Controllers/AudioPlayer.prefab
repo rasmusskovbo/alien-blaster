@@ -53,6 +53,9 @@ MonoBehaviour:
   onHitVolume: 0.3
   playerDestroyedVolume: 0.75
   enemyDestroyedVolume: 0.25
+  pickupSFX: {fileID: 8300000, guid: c8e42a50c09077e43a6a5905a048ef11, type: 3}
+  boostSFX: {fileID: 8300000, guid: 0a4e4f04d897b43449c2e153dfea65a1, type: 3}
+  pickupSFXVolume: 0.65
 --- !u!82 &1038626514
 AudioSource:
   m_ObjectHideFlags: 0

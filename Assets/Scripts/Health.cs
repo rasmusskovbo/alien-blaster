@@ -25,7 +25,6 @@ public class Health : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         DamageDealer damageDealer = other.GetComponent<DamageDealer>();
-
         if (damageDealer)
         {
             TakeDamage(damageDealer.GetDamage());
@@ -55,7 +54,18 @@ public class Health : MonoBehaviour
     {
         return maxHealth;
     }
-    
+
+    public void Heal(float value)
+    {
+        if ((health + value) > maxHealth)
+        {
+            health = maxHealth;
+        }
+        else
+        {
+            health += (int) value;    
+        }
+    }
 
     void PlayHitEffect()
     {
