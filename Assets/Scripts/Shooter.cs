@@ -9,10 +9,13 @@ public class Shooter : MonoBehaviour
     [SerializeField] private GameObject projectilePrefab;
     [SerializeField] private GameObject boostProjectilePrefab;
     [SerializeField] private float projectileSpeed = 10f;
-    [SerializeField] private float firingSpeed = 1f;
-    [SerializeField] private float projectileLifetime = 5f;
+    [SerializeField] private float fastestProjectileSpeed = 30f;
+    [SerializeField] private float projectileSpeedIncrement = 1f;
+    [SerializeField] private float firingSpeed = 0.35f;
     [SerializeField] private float fastestFiringSpeed = 0.05f;
-    [SerializeField] private float boostFireOffset = 0.3f;
+    [SerializeField] private float firingSpeedIncrement = 0.03f;
+    [SerializeField] private float projectileLifetime = 5f;
+    [SerializeField] private float boostFireOffset = 0.4f;
     bool boostActive = false;
     
     [Header("AI")]
@@ -150,12 +153,29 @@ public class Shooter : MonoBehaviour
         return Mathf.Clamp(randomFiringRate, minimumFiringSpeed, maximumFiringSpeed);
     }
 
-    public void IncreaseFiringRate(float value)
+    public void IncreaseFiringRate()
     {
-        if ((firingSpeed - value) <= fastestFiringSpeed) return;
-            
-        firingSpeed -= value;
-        projectileSpeed += value * 2;
+        if ((firingSpeed - firingSpeedIncrement) < fastestFiringSpeed)
+        {
+            firingSpeed = fastestFiringSpeed;
+        }
+        else
+        {
+            firingSpeed -= firingSpeedIncrement; 
+        }
+
+        
+        if ((projectileSpeed + projectileSpeedIncrement) > fastestProjectileSpeed)
+        {
+            projectileSpeed = fastestProjectileSpeed; 
+        }
+        else
+        {
+            projectileSpeed += projectileSpeedIncrement;
+        }
+
+        Debug.Log(ShouldStopFireRatePickupSpawn());
+        if (ShouldStopFireRatePickupSpawn()) FindObjectOfType<PickupSpawner>().StopFireRateSpawn();
 
     }
 
@@ -178,6 +198,11 @@ public class Shooter : MonoBehaviour
         firingSpeed = currentFiringRate;
             
         boostActive = false; 
+    }
+
+    public bool ShouldStopFireRatePickupSpawn()
+    {
+        return firingSpeed == fastestFiringSpeed && projectileSpeed == fastestProjectileSpeed;
     }
 
 }

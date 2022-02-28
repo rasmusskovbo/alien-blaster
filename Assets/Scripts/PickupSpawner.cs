@@ -28,6 +28,7 @@ public class PickupSpawner : MonoBehaviour
     
     private Vector2 spawnPosition;
     private int spawnRange = 4;
+    private Coroutine fireRateSpawner;
     
     void Start()
     {
@@ -40,7 +41,7 @@ public class PickupSpawner : MonoBehaviour
                 hpPickupLifeTime)
             );
         
-        StartCoroutine(
+        fireRateSpawner = StartCoroutine(
             SpawnPickup(
                 fireRatePickupPrefab, 
                 fireRateFrequency, 
@@ -97,5 +98,10 @@ public class PickupSpawner : MonoBehaviour
             baseFrequency - variance,
             baseFrequency + variance
         );
+    }
+
+    public void StopFireRateSpawn()
+    {
+        StopCoroutine(fireRateSpawner);
     }
 }

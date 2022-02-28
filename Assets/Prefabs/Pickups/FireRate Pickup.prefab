@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7878704122122178946}
+  - component: {fileID: 1164814062213853532}
   - component: {fileID: 3856745690635789734}
   - component: {fileID: 6083765055693490331}
-  - component: {fileID: 1164814062213853532}
   m_Layer: 8
   m_Name: FireRate Pickup
   m_TagString: Pickups
@@ -34,6 +34,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
+--- !u!114 &1164814062213853532
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 34792580942602411}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4e0dcf2a50224648a7c6622312a5863, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: FR
+  value: 0.03
 --- !u!50 &3856745690635789734
 Rigidbody2D:
   serializedVersion: 4
@@ -81,20 +95,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.35, y: 0.35}
   m_EdgeRadius: 0
---- !u!114 &1164814062213853532
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 34792580942602411}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4e0dcf2a50224648a7c6622312a5863, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  type: FR
-  value: 0.035
 --- !u!1 &6618772675559863334
 GameObject:
   m_ObjectHideFlags: 0

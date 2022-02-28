@@ -46,11 +46,11 @@ TagManager:
   - name: Background
     uniqueID: 4069058157
     locked: 0
-  - name: Projectiles
-    uniqueID: 993618647
-    locked: 0
   - name: Pickups
     uniqueID: 565420011
+    locked: 0
+  - name: Projectiles
+    uniqueID: 993618647
     locked: 0
   - name: Enemies
     uniqueID: 2472684507

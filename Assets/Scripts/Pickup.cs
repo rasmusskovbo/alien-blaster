@@ -26,7 +26,7 @@ public class Pickup : MonoBehaviour
         
         if (type.Equals("FR"))
         {
-            col.GetComponent<Shooter>().IncreaseFiringRate(value);
+            col.GetComponent<Shooter>().IncreaseFiringRate();
             _audioPlayer.PlayPickupSFX();
             Destroy(gameObject);
         }
@@ -34,9 +34,15 @@ public class Pickup : MonoBehaviour
         if (type.Equals("BOOST"))
         {
             col.GetComponent<Shooter>().ActivateBoost(value);
+            FindObjectOfType<UIDisplay>().DisplayBoost();
             _audioPlayer.PlayBoostSFX();
             Destroy(gameObject);
         }
+    }
+
+    public float GetValue()
+    {
+        return value;
     }
     
 }
