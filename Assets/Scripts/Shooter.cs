@@ -15,6 +15,7 @@ public class Shooter : MonoBehaviour
     [SerializeField] private float fastestFiringSpeed = 0.05f;
     [SerializeField] private float firingSpeedIncrement = 0.03f;
     [SerializeField] private float projectileLifetime = 5f;
+    [SerializeField] private bool weaponUpgraded = false;
     [SerializeField] private float boostFireOffset = 0.4f;
     bool boostActive = false;
     
@@ -65,13 +66,17 @@ public class Shooter : MonoBehaviour
     {
         while (true)
         {
-            if (!boostActive)
+            if (boostActive)
             {
-                yield return FireProjectile();
+                yield return BoostFire();
+            }
+            else if (weaponUpgraded)
+            {
+                yield return DoubleProjectileFire();
             }
             else
             {
-                yield return BoostFire();
+                yield return FireProjectile();
             }
 
         }
@@ -101,6 +106,39 @@ public class Shooter : MonoBehaviour
         List<GameObject> projectiles = new List<GameObject>();
         projectiles.Add(projectileLeft);
         projectiles.Add(projectileMiddle);
+        projectiles.Add(projectileRight);
+
+        foreach (GameObject projectile in projectiles)
+        {
+            Rigidbody2D rb = projectile.GetComponent<Rigidbody2D>();
+
+            if (rb) rb.velocity = transform.up * projectileSpeed;
+
+            Destroy(projectile, projectileLifetime);
+        }
+
+        _audioPlayer.PlayShootingFX();
+        return new WaitForSeconds(firingSpeed);
+    }
+    
+    private object DoubleProjectileFire()
+    {
+        float positionX = transform.position.x;
+        float positionY = transform.position.y;
+
+        GameObject projectileLeft = Instantiate(
+            projectilePrefab,
+            new Vector3(positionX - boostFireOffset / 2, positionY),
+            Quaternion.identity
+        );
+        GameObject projectileRight = Instantiate(
+            projectilePrefab,
+            new Vector3(positionX + boostFireOffset / 2, positionY),
+            Quaternion.identity
+        );
+        
+        List<GameObject> projectiles = new List<GameObject>();
+        projectiles.Add(projectileLeft);
         projectiles.Add(projectileRight);
 
         foreach (GameObject projectile in projectiles)
@@ -174,8 +212,11 @@ public class Shooter : MonoBehaviour
             projectileSpeed += projectileSpeedIncrement;
         }
 
-        Debug.Log(ShouldStopFireRatePickupSpawn());
-        if (ShouldStopFireRatePickupSpawn()) FindObjectOfType<PickupSpawner>().StopFireRateSpawn();
+        if (ShouldStopFireRatePickupSpawn())
+        {
+            FindObjectOfType<PickupSpawner>().StopFireRateSpawn();
+            weaponUpgraded = true;
+        }
 
     }
 
@@ -186,15 +227,13 @@ public class Shooter : MonoBehaviour
 
     IEnumerator InnerBoost(float duration)
     {
-        Debug.Log("Activate boost");
         float currentFiringRate = firingSpeed;
 
         firingSpeed = fastestFiringSpeed;
         boostActive = true;
 
         yield return new WaitForSecondsRealtime(duration);
-
-        Debug.Log("Resuming control");
+        
         firingSpeed = currentFiringRate;
             
         boostActive = false; 

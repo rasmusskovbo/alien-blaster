@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cee9cf6591a3749598aef76e3169e905, type: 3}
-  m_Name: W Spread Easy
+  m_Name: Curve Down Left
   m_EditorClassIdentifier: 
   enemyPrefabs:
   - {fileID: 4312365996676449754, guid: 56a1aea7bc2024acabcb73a552a92f52, type: 3}
@@ -19,8 +19,9 @@ MonoBehaviour:
   - {fileID: 4312365996676449754, guid: 56a1aea7bc2024acabcb73a552a92f52, type: 3}
   - {fileID: 4312365996676449754, guid: 56a1aea7bc2024acabcb73a552a92f52, type: 3}
   - {fileID: 4312365996676449754, guid: 56a1aea7bc2024acabcb73a552a92f52, type: 3}
-  pathPrefab: {fileID: 9196830151065806719, guid: a230dcc578e3f41818a50852f3146489, type: 3}
-  moveSpeed: 8
+  - {fileID: 4312365996676449754, guid: 56a1aea7bc2024acabcb73a552a92f52, type: 3}
+  pathPrefab: {fileID: 9196830151065806719, guid: 7a461f1c64cf47140a9dae79a23e3c86, type: 3}
+  moveSpeed: 5
   timeBetweenSpawns: 1
   spawnTimeVariance: 0
-  minimumSpawnTime: 0.5
+  minimumSpawnTime: 1

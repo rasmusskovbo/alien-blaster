@@ -53,7 +53,7 @@ public class WaveConfigSO : ScriptableObject
             timeBetweenSpawns - spawnTimeVariance,
             timeBetweenSpawns + spawnTimeVariance
         );
-
+        
         return Mathf.Clamp(spawnTime, minimumSpawnTime, float.MaxValue);
     }
 }

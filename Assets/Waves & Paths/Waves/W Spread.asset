@@ -10,14 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cee9cf6591a3749598aef76e3169e905, type: 3}
-  m_Name: Easy Traverse L-R
+  m_Name: W Spread
   m_EditorClassIdentifier: 
   enemyPrefabs:
   - {fileID: 4312365996676449754, guid: 56a1aea7bc2024acabcb73a552a92f52, type: 3}
   - {fileID: 4312365996676449754, guid: 56a1aea7bc2024acabcb73a552a92f52, type: 3}
   - {fileID: 4312365996676449754, guid: 56a1aea7bc2024acabcb73a552a92f52, type: 3}
-  pathPrefab: {fileID: 9196830151065806719, guid: 1025f0ac723df4a2297e3f2c4ea9f3bb, type: 3}
-  moveSpeed: 5
-  timeBetweenSpawns: 1
-  spawnTimeVariance: 0
-  minimumSpawnTime: 0.5
+  - {fileID: 4312365996676449754, guid: 56a1aea7bc2024acabcb73a552a92f52, type: 3}
+  - {fileID: 4312365996676449754, guid: 56a1aea7bc2024acabcb73a552a92f52, type: 3}
+  - {fileID: 4312365996676449754, guid: 56a1aea7bc2024acabcb73a552a92f52, type: 3}
+  pathPrefab: {fileID: 9196830151065806719, guid: a230dcc578e3f41818a50852f3146489, type: 3}
+  moveSpeed: 8
+  timeBetweenSpawns: 1.5
+  spawnTimeVariance: 0.5
+  minimumSpawnTime: 1

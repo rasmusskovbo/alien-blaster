@@ -18,9 +18,13 @@ public class Pathfinder : MonoBehaviour
 
     void Start()
     {
-        waveConfig = enemySpawner.GetCurrentWave();
         waypoints = waveConfig.GetWaypoints();
         transform.position = waypoints[waypointIndex].position; // Setting initial position;
+    }
+
+    public void SetCurrentWave(WaveConfigSO wave)
+    {
+        waveConfig = wave;
     }
     
     void Update()

@@ -10,15 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cee9cf6591a3749598aef76e3169e905, type: 3}
-  m_Name: Bomber Traverse Medium
+  m_Name: BottomUp Traverse Bomber
   m_EditorClassIdentifier: 
   enemyPrefabs:
   - {fileID: 4312365996676449754, guid: da20de0abd781ac45a9574f22d6ac617, type: 3}
   - {fileID: 4312365996676449754, guid: da20de0abd781ac45a9574f22d6ac617, type: 3}
   - {fileID: 4312365996676449754, guid: da20de0abd781ac45a9574f22d6ac617, type: 3}
   - {fileID: 4312365996676449754, guid: da20de0abd781ac45a9574f22d6ac617, type: 3}
-  pathPrefab: {fileID: 9196830151065806719, guid: 55dd0fe3b056c1245bbef30ad1e07ffb, type: 3}
-  moveSpeed: 3
+  - {fileID: 4312365996676449754, guid: da20de0abd781ac45a9574f22d6ac617, type: 3}
+  - {fileID: 4312365996676449754, guid: da20de0abd781ac45a9574f22d6ac617, type: 3}
+  - {fileID: 4312365996676449754, guid: da20de0abd781ac45a9574f22d6ac617, type: 3}
+  pathPrefab: {fileID: 9196830151065806719, guid: 11760372decfd36479225fbbaad47aff, type: 3}
+  moveSpeed: 5
   timeBetweenSpawns: 2
   spawnTimeVariance: 1
   minimumSpawnTime: 1

@@ -232,7 +232,7 @@ MonoBehaviour:
   hpPickupSpeed: 5
   hpPickupLifeTime: 8
   fireRatePickupPrefab: {fileID: 34792580942602411, guid: b7e0bf1a9023ee34899b583d8b48a442, type: 3}
-  fireRateFrequency: 20
+  fireRateFrequency: 8
   fireRateFrequencyVariance: 5
   fireRatePickupSpeed: 8
   fireRatePickupLifeTime: 5
@@ -796,7 +796,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4640469776968982160, guid: e181f69975fd54fcebe76dba476e8f73, type: 3}
       propertyPath: projectileSpeed
-      value: 12
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 4640469776968982160, guid: e181f69975fd54fcebe76dba476e8f73, type: 3}
       propertyPath: fastestFiringSpeed
@@ -805,6 +805,10 @@ PrefabInstance:
     - target: {fileID: 4640469776968982160, guid: e181f69975fd54fcebe76dba476e8f73, type: 3}
       propertyPath: fastestProjectileSpeed
       value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 4640469776968982160, guid: e181f69975fd54fcebe76dba476e8f73, type: 3}
+      propertyPath: projectileSpeedIncrement
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e181f69975fd54fcebe76dba476e8f73, type: 3}
@@ -1101,6 +1105,22 @@ PrefabInstance:
     - target: {fileID: 688329173376082465, guid: 5b69a7080e2e6444ebceb968d8ecf5d7, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 688329173376082466, guid: 5b69a7080e2e6444ebceb968d8ecf5d7, type: 3}
+      propertyPath: timeBetweenWaves
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 688329173376082466, guid: 5b69a7080e2e6444ebceb968d8ecf5d7, type: 3}
+      propertyPath: bossSpawnIncrement
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 688329173376082466, guid: 5b69a7080e2e6444ebceb968d8ecf5d7, type: 3}
+      propertyPath: maxAmountOfSpawners
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 688329173376082466, guid: 5b69a7080e2e6444ebceb968d8ecf5d7, type: 3}
+      propertyPath: timeBetweenBossSpawns
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 688329173376082467, guid: 5b69a7080e2e6444ebceb968d8ecf5d7, type: 3}
       propertyPath: m_Name

@@ -6,83 +6,75 @@ using Random = UnityEngine.Random;
 
 public class EnemySpawner : MonoBehaviour
 {
+    [Header("Waves")]
     [SerializeField] private List<WaveConfigSO> waveConfigs;
     [SerializeField] private float timeBetweenWaves = 2;
     [SerializeField] private bool isLooping = true;
-    [SerializeField] private int delayBetweenExtraWaves = 60;
-    private WaveConfigSO nextWave;
+    [SerializeField] private int maxAmountOfSpawners = 5;
+    [SerializeField] private int timeBetweenExtraSpawners = 30;
+
+    [Header("Boss")] 
+    [SerializeField] private List<WaveConfigSO> bossConfigs;
+    [SerializeField] private float timeBetweenBossSpawns = 60f;
+    [SerializeField] private float bossSpawnIncrement = 10f;
+    [SerializeField] private float minimumTimeBetweenBossSpawns = 5f;
+
+    private int waveCounter;
     
     void Start()
     {
-        StartCoroutine(SpawnEnemyWaves());
-        StartCoroutine(SpawnIncreasinglyExtraWaves());
+        waveCounter = 0;
+        StartCoroutine(RandomWaveSpawner());
+        StartCoroutine(BossSpawner());
+        StartCoroutine(ScaleDifficulty());
     }
-
-    public WaveConfigSO GetCurrentWave()
-    {
-        return nextWave;
-    }
-
-    IEnumerator SpawnEnemyWaves()
+    
+    IEnumerator RandomWaveSpawner()
     {
         do
         {
-            foreach (WaveConfigSO wave in waveConfigs)
+            int randomIndex = Random.Range(0, waveConfigs.Count);
+            WaveConfigSO wave = waveConfigs[randomIndex];
+
+            for (int i = 0; i < wave.GetEnemyCount(); i++)
             {
-                nextWave = wave;
-            
-                for (int i = 0; i < nextWave.GetEnemyCount(); i++)
-                {
-                    Instantiate(
-                        nextWave.GetEnemyPrefab(i), 
-                        nextWave.GetStartingWaypoint().position,
-                        Quaternion.Euler(0,0,180),
-                        transform
-                    );
-                    
-                    
-                    
-                    yield return new WaitForSeconds(nextWave.getRandomSpawnTime());
-                }
-            
-                yield return new WaitForSeconds(timeBetweenWaves);
+                Instantiate(
+                    wave.GetEnemyPrefab(i),
+                    wave.GetStartingWaypoint().position,
+                    Quaternion.Euler(0, 0, 180),
+                    transform
+                ).GetComponent<Pathfinder>().SetCurrentWave(wave);
+
+                waveCounter++;
+                
+                yield return new WaitForSeconds(wave.getRandomSpawnTime());
             }
+
+            yield return new WaitForSeconds(timeBetweenWaves);
             
-            IncreaseDifficulty();
         } while (isLooping);
-
     }
-
-    IEnumerator SpawnIncreasinglyExtraWaves()
+    
+    IEnumerator BossSpawner()
     {
         do
         {
-            for (int i = 0; i < waveConfigs.Count; i++)
-            {
-                yield return new WaitForSeconds(delayBetweenExtraWaves);
-
-                
-                int randomIndex = Random.Range(0, waveConfigs.Count);
-                nextWave = waveConfigs[randomIndex];
-                
-                Debug.Log(waveConfigs.Count);
-                Debug.Log("Spawning extra index, wave: " + randomIndex +", " + nextWave.name);
+            yield return new WaitForSeconds(timeBetweenBossSpawns);
             
-                for (int j = 0; j < nextWave.GetEnemyCount(); j++)
-                {
-                    Instantiate(
-                        nextWave.GetEnemyPrefab(j), 
-                        nextWave.GetStartingWaypoint().position,
-                        Quaternion.Euler(0,0,180),
-                        transform
-                    );
-                    
-                    yield return new WaitForSeconds(nextWave.getRandomSpawnTime());
-                }
-            }
-        } while (isLooping);
-    }
+            int randomIndex = Random.Range(0, bossConfigs.Count);
+            WaveConfigSO bossWave = bossConfigs[randomIndex];
 
+            Instantiate(
+                bossWave.GetEnemyPrefab(0),
+                bossWave.GetStartingWaypoint().position,
+                Quaternion.Euler(0, 0, 180),
+                transform
+            ).GetComponent<Pathfinder>().SetCurrentWave(bossWave);
+
+        } while (true);
+    }
+    
+    /*
     void IncreaseDifficulty()
     {
         // Decrease time between all wave spawners
@@ -105,7 +97,26 @@ public class EnemySpawner : MonoBehaviour
         }
 
         // Add wave spawner ever reset
-        StartCoroutine(SpawnIncreasinglyExtraWaves());
+        StartCoroutine(SecondSpawner());
+    }
+    */
+
+    IEnumerator ScaleDifficulty()
+    {
+        int counter = 0;
+
+        while (counter < maxAmountOfSpawners)
+        {
+            yield return new WaitForSeconds(timeBetweenExtraSpawners);
+            if (timeBetweenWaves < maxAmountOfSpawners) timeBetweenWaves++;
+            if (timeBetweenBossSpawns > minimumTimeBetweenBossSpawns) timeBetweenBossSpawns -= bossSpawnIncrement;
+            counter++;
+            Debug.Log("Increasing difficulty. Current level: " + counter);
+            Debug.Log("Time between waves: " + timeBetweenWaves);
+            Debug.Log("Boss spawn frequency: " + timeBetweenBossSpawns);
+            StartCoroutine(RandomWaveSpawner());
+        }
         
     }
+    
 }

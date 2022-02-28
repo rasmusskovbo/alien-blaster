@@ -44,26 +44,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waveConfigs:
-  - {fileID: 11400000, guid: 15f276c6b6b304848a6f277d35be7e79, type: 2}
-  - {fileID: 11400000, guid: 04485ee77fbb84bbabb6e3615a450f40, type: 2}
-  - {fileID: 11400000, guid: ccbcf2e383605f542a49905562b30b56, type: 2}
-  - {fileID: 11400000, guid: e1723232201224744b32917256a71835, type: 2}
-  - {fileID: 11400000, guid: ab14d98f0d5b91f4da489eec64902d0c, type: 2}
   - {fileID: 11400000, guid: 388ae5a710e4ea845b93ecc6303bd4aa, type: 2}
-  - {fileID: 11400000, guid: 32bf7cfef82abdc44b6d3e65828c24ef, type: 2}
-  - {fileID: 11400000, guid: ccbcf2e383605f542a49905562b30b56, type: 2}
-  - {fileID: 11400000, guid: 82119c788371c6c4387760014d6a0c34, type: 2}
-  - {fileID: 11400000, guid: 1715c3418457b454f8d3a89281b89bfd, type: 2}
-  - {fileID: 11400000, guid: d04e6229257cb9d4dbdc20f0172c7eb7, type: 2}
+  - {fileID: 11400000, guid: 2c4f562fe1da6124ba1e0aba7e02b85f, type: 2}
+  - {fileID: 11400000, guid: e1723232201224744b32917256a71835, type: 2}
   - {fileID: 11400000, guid: 15f276c6b6b304848a6f277d35be7e79, type: 2}
-  - {fileID: 11400000, guid: d3aa351ce07795146bba6f75ab6f8499, type: 2}
-  - {fileID: 11400000, guid: 04485ee77fbb84bbabb6e3615a450f40, type: 2}
-  - {fileID: 11400000, guid: d543bade3b1c0b140bb04c020780e768, type: 2}
+  - {fileID: 11400000, guid: ccbcf2e383605f542a49905562b30b56, type: 2}
   - {fileID: 11400000, guid: 32bf7cfef82abdc44b6d3e65828c24ef, type: 2}
+  - {fileID: 11400000, guid: d3aa351ce07795146bba6f75ab6f8499, type: 2}
+  - {fileID: 11400000, guid: 1715c3418457b454f8d3a89281b89bfd, type: 2}
+  - {fileID: 11400000, guid: ab14d98f0d5b91f4da489eec64902d0c, type: 2}
+  - {fileID: 11400000, guid: 60f46d0cea26ad143b50f4ae4a7f27e7, type: 2}
   - {fileID: 11400000, guid: 04485ee77fbb84bbabb6e3615a450f40, type: 2}
-  - {fileID: 11400000, guid: ed25e3c68484dfe46a84e12b189ff92e, type: 2}
-  - {fileID: 11400000, guid: 752974f8e00f9a44c98883dfacda3c90, type: 2}
-  - {fileID: 11400000, guid: ecd1264483d3b38419b82829299ffd08, type: 2}
   timeBetweenWaves: 2
   isLooping: 1
-  delayBetweenExtraWaves: 10
+  maxAmountOfSpawners: 4
+  timeBetweenExtraSpawners: 40
+  bossConfigs:
+  - {fileID: 11400000, guid: b2784a0b36b89e34f8113b892df49601, type: 2}
+  - {fileID: 11400000, guid: f82c6a0c46949d84ca8d333d648cf63a, type: 2}
+  timeBetweenBossSpawns: 16
+  bossSpawnIncrement: 2
+  minimumTimeBetweenBossSpawns: 10
