@@ -124,18 +124,22 @@ MonoBehaviour:
   minimumFiringSpeed: 1
   maximumFiringSpeed: 3
   firingSpeedVariance: 1
-  fastestFiringSpeed: 0.035
-  fastestProjectileSpeed: 30
+  fastestFiringSpeed: 0.05
+  fastestProjectileSpeed: 32
   projectileSpeedIncrement: 0.5
   firingSpeedIncrement: 0.02
   boostFireOffset: 0.4
   currentUpgradeProgress: 0
   upgradesRequiredPerTier: 10
   upgradeScaling: 5
-  maxWeaponsTier: 4
+  maxWeaponsTier: 5
   projectileRotation: 15
   tier2Prefab: {fileID: 433910048897111177, guid: 4d007f62abd8a054f89623351f606ffd, type: 3}
   tier3Prefab: {fileID: 433910048897111177, guid: a70965ac226df9441b3519bd4c60796a, type: 3}
+  tier4Prefab: {fileID: 433910048897111177, guid: 16e7c87a2eef03447bba47bdf7ad4de4, type: 3}
+  tier5Prefab: {fileID: 433910048897111177, guid: 867dfa2b96574b44183661fc7a3ff4fd, type: 3}
+  weaponsTier: 1
+  disableBoostAtWeaponsTier: 4
   isFiring: 0
 --- !u!50 &-6939549914499154991
 Rigidbody2D:
