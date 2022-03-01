@@ -30,13 +30,16 @@ public class Shooter : MonoBehaviour
     
     [Header("Weapons Upgrade")]
     [SerializeField] private int currentUpgradeProgress;
-    [SerializeField] private int upgradesRequiredPerTier = 15;
+    [SerializeField] private int upgradesRequiredPerTier = 12;
     [SerializeField] private int upgradeScaling = 5;
-    [SerializeField] private int maxWeaponsTier = 4;
+    [SerializeField] private int maxWeaponsTier = 5;
     [SerializeField] private int projectileRotation = 15;
     [SerializeField] private GameObject tier2Prefab;
     [SerializeField] private GameObject tier3Prefab;
-    private int weaponsTier = 1;
+    [SerializeField] private GameObject tier4Prefab;
+    [SerializeField] private GameObject tier5Prefab;
+    [SerializeField] private int weaponsTier = 1;
+    [SerializeField] private int disableBoostAtWeaponsTier = 3;
     
     
     [HideInInspector]
@@ -103,7 +106,12 @@ public class Shooter : MonoBehaviour
                     
                     case 4:
                         yield return TierFourFire();
-                        SwapProjectilePrefab(boostProjectilePrefab);
+                        SwapProjectilePrefab(tier4Prefab);
+                        break;
+                    
+                    case 5:
+                        yield return TierFiveFire();
+                        SwapProjectilePrefab(tier5Prefab);
                         break;
                 }
         }
@@ -274,6 +282,80 @@ public class Shooter : MonoBehaviour
         
         return new WaitForSeconds(firingSpeed);
     }
+    
+    private object TierFiveFire()
+    {
+        float positionX = transform.position.x;
+        float positionY = transform.position.y;
+
+        GameObject projectileFarLeft = Instantiate(
+            projectilePrefab,
+            new Vector3(positionX - boostFireOffset, positionY),
+            Quaternion.Euler(0,0,90)
+        );
+        GameObject projectileLeft = Instantiate(
+            projectilePrefab,
+            new Vector3(positionX - boostFireOffset, positionY),
+            Quaternion.Euler(0,0,projectileRotation)
+        );
+        GameObject projectileLeftTwo = Instantiate(
+            projectilePrefab,
+            new Vector3(positionX - boostFireOffset, positionY),
+            Quaternion.Euler(0,0,projectileRotation * 2)
+        );
+        GameObject projectileMiddleLeft = Instantiate(
+            projectilePrefab,
+            new Vector3(positionX - boostFireOffset / 2, positionY),
+            Quaternion.identity
+        );
+        GameObject projectileMiddleRight = Instantiate(
+            projectilePrefab,
+            new Vector3(positionX + boostFireOffset / 2, positionY),
+            Quaternion.identity
+        );
+        GameObject projectileRight = Instantiate(
+            projectilePrefab,
+            new Vector3(positionX + boostFireOffset, positionY),
+            Quaternion.Euler(0,0,-projectileRotation)
+        );
+        GameObject projectileRightTwo = Instantiate(
+            projectilePrefab,
+            new Vector3(positionX + boostFireOffset, positionY),
+            Quaternion.Euler(0, 0, -projectileRotation * 2)
+        );
+            
+        GameObject projectileFarRight = Instantiate(
+            projectilePrefab,
+            new Vector3(positionX + boostFireOffset, positionY),
+            Quaternion.Euler(0,0,-90)
+        );
+        GameObject projectileBottomLeft = Instantiate(
+            projectilePrefab,
+            new Vector3(positionX - boostFireOffset / 2, positionY),
+            Quaternion.Euler(0,0,180)
+        );
+        GameObject projectileBottomRight = Instantiate(
+            projectilePrefab,
+            new Vector3(positionX + boostFireOffset / 2, positionY),
+            Quaternion.Euler(0,0,180)
+        );
+        
+        List<GameObject> projectiles = new List<GameObject>();
+        projectiles.Add(projectileFarLeft);
+        projectiles.Add(projectileLeft);
+        projectiles.Add(projectileLeftTwo);
+        projectiles.Add(projectileMiddleLeft);
+        projectiles.Add(projectileMiddleRight);
+        projectiles.Add(projectileRight);
+        projectiles.Add(projectileRightTwo);
+        projectiles.Add(projectileFarRight);
+        projectiles.Add(projectileBottomLeft);
+        projectiles.Add(projectileBottomRight);
+
+        FireProjectilesLoop(projectiles);
+        
+        return new WaitForSeconds(firingSpeed);
+    }
 
     public void FireProjectilesLoop(List<GameObject> projectiles)
     {
@@ -361,10 +443,15 @@ public class Shooter : MonoBehaviour
     {
         currentUpgradeProgress++;
         UpgradeWeaponsAndResetTier();
+
+        if (weaponsTier >= disableBoostAtWeaponsTier)
+        {
+            FindObjectOfType<PickupSpawner>().StopBoostSpawn();
+        }
         
         if (ShouldStopWeaponsUpgradePickup())
         {
-            FindObjectOfType<PickupSpawner>().StopBoostSpawn();
+            
             FindObjectOfType<PickupSpawner>().StopWeaponsUpgradeSpawn();
             FindObjectOfType<UIDisplay>().DisableWeaponsUpgradeSlider();
         }

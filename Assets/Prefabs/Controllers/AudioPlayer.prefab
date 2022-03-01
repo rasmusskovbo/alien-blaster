@@ -56,9 +56,9 @@ MonoBehaviour:
   enemyDestroyedVolume: 0.15
   pickupSFX: {fileID: 8300000, guid: c8e42a50c09077e43a6a5905a048ef11, type: 3}
   boostSFX: {fileID: 8300000, guid: 0a4e4f04d897b43449c2e153dfea65a1, type: 3}
-  pickupSFXVolume: 0.65
-  weaponsTierUpgradeSFX: {fileID: 8300000, guid: 600d5b761ed1a924eae86b4382d5cee8, type: 3}
-  weaponsTierUpgradeSFXVolume: 0.65
+  pickupSFXVolume: 0.55
+  weaponsTierUpgradeSFX: {fileID: 8300000, guid: c8a7810e137cf214bb15b038a03bdfe7, type: 3}
+  weaponsTierUpgradeSFXVolume: 0.55
 --- !u!82 &1038626514
 AudioSource:
   m_ObjectHideFlags: 0

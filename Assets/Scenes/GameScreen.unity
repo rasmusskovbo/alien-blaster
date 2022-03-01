@@ -554,6 +554,42 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4640469776968982160, guid: e181f69975fd54fcebe76dba476e8f73, type: 3}
+      propertyPath: tier4Prefab
+      value: 
+      objectReference: {fileID: 433910048897111177, guid: 16e7c87a2eef03447bba47bdf7ad4de4, type: 3}
+    - target: {fileID: 4640469776968982160, guid: e181f69975fd54fcebe76dba476e8f73, type: 3}
+      propertyPath: tier5Prefab
+      value: 
+      objectReference: {fileID: 433910048897111177, guid: 867dfa2b96574b44183661fc7a3ff4fd, type: 3}
+    - target: {fileID: 4640469776968982160, guid: e181f69975fd54fcebe76dba476e8f73, type: 3}
+      propertyPath: maxWeaponsTier
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4640469776968982160, guid: e181f69975fd54fcebe76dba476e8f73, type: 3}
+      propertyPath: upgradeScaling
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4640469776968982160, guid: e181f69975fd54fcebe76dba476e8f73, type: 3}
+      propertyPath: fastestFiringSpeed
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 4640469776968982160, guid: e181f69975fd54fcebe76dba476e8f73, type: 3}
+      propertyPath: firingSpeedIncrement
+      value: 0.015
+      objectReference: {fileID: 0}
+    - target: {fileID: 4640469776968982160, guid: e181f69975fd54fcebe76dba476e8f73, type: 3}
+      propertyPath: fastestProjectileSpeed
+      value: 32
+      objectReference: {fileID: 0}
+    - target: {fileID: 4640469776968982160, guid: e181f69975fd54fcebe76dba476e8f73, type: 3}
+      propertyPath: upgradesRequiredPerTier
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4640469776968982160, guid: e181f69975fd54fcebe76dba476e8f73, type: 3}
+      propertyPath: disableBoostAtWeaponsTier
+      value: 4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e181f69975fd54fcebe76dba476e8f73, type: 3}
 --- !u!1001 &2040103198
@@ -663,6 +699,22 @@ PrefabInstance:
     - target: {fileID: 688329173376082465, guid: 5b69a7080e2e6444ebceb968d8ecf5d7, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 688329173376082466, guid: 5b69a7080e2e6444ebceb968d8ecf5d7, type: 3}
+      propertyPath: timeBetweenWaves
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 688329173376082466, guid: 5b69a7080e2e6444ebceb968d8ecf5d7, type: 3}
+      propertyPath: maxAmountOfSpawners
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 688329173376082466, guid: 5b69a7080e2e6444ebceb968d8ecf5d7, type: 3}
+      propertyPath: timeBetweenBossSpawns
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 688329173376082466, guid: 5b69a7080e2e6444ebceb968d8ecf5d7, type: 3}
+      propertyPath: minimumTimeBetweenBossSpawns
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 688329173376082467, guid: 5b69a7080e2e6444ebceb968d8ecf5d7, type: 3}
       propertyPath: m_Name
