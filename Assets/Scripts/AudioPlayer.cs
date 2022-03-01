@@ -10,6 +10,7 @@ public class AudioPlayer : MonoBehaviour
 
     [Header("Damage")] 
     [SerializeField] private AudioClip onHitSFX;
+    [SerializeField] private AudioClip onForceFieldHitSFX;
     [SerializeField] private AudioClip playerDestroyedSFX;
     [SerializeField] private AudioClip enemyDestroyedSFX;
     [SerializeField] [Range(0f, 1f)] private float onHitVolume = 0.25f;
@@ -20,6 +21,10 @@ public class AudioPlayer : MonoBehaviour
     [SerializeField] private AudioClip pickupSFX;
     [SerializeField] private AudioClip boostSFX;
     [SerializeField] [Range(0f, 1f)] private float pickupSFXVolume = 0.25f;
+
+    [Header("Upgrades")] 
+    [SerializeField] private AudioClip weaponsTierUpgradeSFX;
+    [SerializeField] [Range(0f, 1f)] private float weaponsTierUpgradeSFXVolume = 0.25f;
 
     // Static instancess version of Singleton pattern
     private static AudioPlayer instance;
@@ -90,6 +95,18 @@ public class AudioPlayer : MonoBehaviour
             );
         }
     }
+    
+    public void PlayOnForceFieldHitSFX()
+    {
+        if (onForceFieldHitSFX != null)
+        {
+            AudioSource.PlayClipAtPoint(
+                onForceFieldHitSFX, 
+                Camera.main.transform.position, 
+                onHitVolume
+            );
+        }
+    }
 
     public void PlayPlayerDestroySFX()
     {
@@ -135,6 +152,18 @@ public class AudioPlayer : MonoBehaviour
                 boostSFX, 
                 Camera.main.transform.position, 
                 pickupSFXVolume
+            );
+        }
+    }
+    
+    public void PlayWeaponsTierUpgradeSFX()
+    {
+        if (weaponsTierUpgradeSFX != null)
+        {
+            AudioSource.PlayClipAtPoint(
+                weaponsTierUpgradeSFX, 
+                Camera.main.transform.position, 
+                weaponsTierUpgradeSFXVolume
             );
         }
     }

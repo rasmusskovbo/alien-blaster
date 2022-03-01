@@ -111,9 +111,6 @@ public class EnemySpawner : MonoBehaviour
             if (timeBetweenWaves < maxAmountOfSpawners) timeBetweenWaves++;
             if (timeBetweenBossSpawns > minimumTimeBetweenBossSpawns) timeBetweenBossSpawns -= bossSpawnIncrement;
             counter++;
-            Debug.Log("Increasing difficulty. Current level: " + counter);
-            Debug.Log("Time between waves: " + timeBetweenWaves);
-            Debug.Log("Boss spawn frequency: " + timeBetweenBossSpawns);
             StartCoroutine(RandomWaveSpawner());
         }
         

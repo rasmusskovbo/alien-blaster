@@ -11,7 +11,13 @@ public class PickupSpawner : MonoBehaviour
     [SerializeField] private int hpPickupSpeed = 10;
     [SerializeField] private int hpPickupLifeTime = 10;
     
-    
+    [Header("Shield")]
+    [SerializeField] private GameObject shieldPickupPrefab;
+    [SerializeField] private int shieldFrequency = 30;
+    [SerializeField] private int shieldFrequencyVariance = 5;
+    [SerializeField] private int shieldPickupSpeed = 10;
+    [SerializeField] private int shieldPickupLifeTime = 10;
+
     [Header("Fire Rate")]
     [SerializeField] private GameObject fireRatePickupPrefab;
     [SerializeField] private int fireRateFrequency = 60;
@@ -26,9 +32,18 @@ public class PickupSpawner : MonoBehaviour
     [SerializeField] private int boostPickupSpeed = 15;
     [SerializeField] private int boostPickupLifeTime = 5;
     
+    [Header("Weapons Upgrade")]
+    [SerializeField] private GameObject weaponsUpgradePickupPrefab;
+    [SerializeField] private int weaponsUpgradeFrequency = 20;
+    [SerializeField] private int weaponsUpgradeFrequencyVariance = 5;
+    [SerializeField] private int weaponsUpgradePickupSpeed = 15;
+    [SerializeField] private int weaponsUpgradePickupLifeTime = 5;
+    
     private Vector2 spawnPosition;
     private int spawnRange = 4;
     private Coroutine fireRateSpawner;
+    private Coroutine boostSpawner;
+    private Coroutine weaponsUpgradeSpawner;
     
     void Start()
     {
@@ -41,6 +56,15 @@ public class PickupSpawner : MonoBehaviour
                 hpPickupLifeTime)
             );
         
+        StartCoroutine(
+            SpawnPickup(
+                shieldPickupPrefab, 
+                shieldFrequency, 
+                shieldFrequencyVariance, 
+                shieldPickupSpeed, 
+                shieldPickupLifeTime)
+        );
+        
         fireRateSpawner = StartCoroutine(
             SpawnPickup(
                 fireRatePickupPrefab, 
@@ -50,13 +74,24 @@ public class PickupSpawner : MonoBehaviour
                 fireRatePickupLifeTime)
         );
         
-        StartCoroutine(
+        boostSpawner = StartCoroutine(
             SpawnPickup(
                 boostPickupPrefab, 
                 boostFrequency, 
                 boostFrequencyVariance, 
                 boostPickupSpeed, 
-                boostPickupLifeTime)
+                boostPickupLifeTime
+                )
+        );
+        
+        weaponsUpgradeSpawner = StartCoroutine(
+            SpawnPickup(
+                weaponsUpgradePickupPrefab, 
+                weaponsUpgradeFrequency, 
+                weaponsUpgradeFrequencyVariance, 
+                weaponsUpgradePickupSpeed, 
+                weaponsUpgradePickupLifeTime
+                )
         );
     }
 
@@ -103,5 +138,15 @@ public class PickupSpawner : MonoBehaviour
     public void StopFireRateSpawn()
     {
         StopCoroutine(fireRateSpawner);
+    }
+
+    public void StopBoostSpawn()
+    {
+        StopCoroutine(boostSpawner);
+    }
+    
+    public void StopWeaponsUpgradeSpawn()
+    {
+        StopCoroutine(weaponsUpgradeSpawner);
     }
 }

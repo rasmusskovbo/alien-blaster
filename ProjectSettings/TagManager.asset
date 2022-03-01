@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Enemy
   - Pickups
+  - Shield
   layers:
   - Default
   - TransparentFX

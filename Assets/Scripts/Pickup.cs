@@ -31,11 +31,26 @@ public class Pickup : MonoBehaviour
             Destroy(gameObject);
         }
         
+        if (type.Equals("WU"))
+        {
+            col.GetComponent<Shooter>().IncreaseWeaponsUpgrade();
+            _audioPlayer.PlayPickupSFX();
+            Destroy(gameObject);
+        }
+        
         if (type.Equals("BOOST"))
         {
             col.GetComponent<Shooter>().ActivateBoost(value);
             FindObjectOfType<UIDisplay>().DisplayBoost();
             _audioPlayer.PlayBoostSFX();
+            Destroy(gameObject);
+        }
+        
+        if (type.Equals("SHIELD"))
+        {
+            col.GetComponent<Health>().ActivateShield(value);
+            FindObjectOfType<UIDisplay>().DisplayShield();
+            _audioPlayer.PlayOnForceFieldHitSFX();
             Destroy(gameObject);
         }
     }

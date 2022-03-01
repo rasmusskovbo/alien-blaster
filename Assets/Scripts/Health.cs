@@ -8,6 +8,7 @@ public class Health : MonoBehaviour
     [SerializeField] private int points = 10; // 2x amount of hits needed base
     [SerializeField] private ParticleSystem hitEffect;
     [SerializeField] private bool applyCameraShake;
+    [SerializeField] private Shield shield;
     
     private CameraShake _cameraShake;
     private AudioPlayer _audioPlayer;
@@ -25,14 +26,23 @@ public class Health : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         DamageDealer damageDealer = other.GetComponent<DamageDealer>();
+        
         if (damageDealer)
         {
-            TakeDamage(damageDealer.GetDamage());
-            PlayHitEffect();
-            _audioPlayer.PlayOnHitSFX();
-            ShakeCamera();
-            damageDealer.Hit();
+            if (shield && shield.isActive())
+            {
+                _audioPlayer.PlayOnForceFieldHitSFX();
+            }
+            else
+            {
+                TakeDamage(damageDealer.GetDamage());
+                PlayHitEffect();
+                _audioPlayer.PlayOnHitSFX();
+                ShakeCamera();
+                damageDealer.Hit();
+            }
         }
+        
     }
 
     void TakeDamage(int damage)
@@ -96,5 +106,10 @@ public class Health : MonoBehaviour
         {
             _cameraShake.Play();
         }
+    }
+
+    public void ActivateShield(float value)
+    {
+        shield.ActivateShield(value);
     }
 }

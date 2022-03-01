@@ -17,27 +17,53 @@ public class UIDisplay : MonoBehaviour
     [SerializeField] private GameObject boostPanel;
     [SerializeField] private Slider boostSlider;
     [SerializeField] private Pickup boostPickup;
-    private float remainingDuration = 0;
+    private float remainingBoostDuration;
     
+    [Header("Shield")] 
+    [SerializeField] private GameObject shieldPanel;
+    [SerializeField] private Slider shieldSlider;
+    [SerializeField] private Pickup shieldPickup;
+    private float remainingShieldDuration;
+    
+    [Header("Weapons Upgrade")] 
+    [SerializeField] private GameObject weaponsUpgradePanel;
+    [SerializeField] private Slider weaponsUpgradeSlider;
+    [SerializeField] private Shooter playerShooter;
+    
+    [Header("Fire Rate")] 
+    [SerializeField] private GameObject fireRatePanel;
+    [SerializeField] private Slider fireRateSlider;
+
     private ScoreKeeper _scoreKeeper;
 
     private void Awake()
     {
         _scoreKeeper = FindObjectOfType<ScoreKeeper>();
         boostPanel.SetActive(false);
+        shieldPanel.SetActive(false);
     }
 
     private void Start()
     {
         healthSlider.maxValue = playerHealth.GetHealth();
         boostSlider.maxValue = boostPickup.GetValue();
+        shieldSlider.maxValue = shieldPickup.GetValue();
+        weaponsUpgradeSlider.maxValue = playerShooter.GetUpgradesPerTier();
+        SetFireRateSlider(
+            playerShooter.GetProjectileSpeed(),
+            playerShooter.GetFastestProjectileSpeed()
+        );
     }
+    
 
     private void Update()
     {
         UpdateScore();
         UpdateHealth();
         UpdateBoost();
+        UpdateShield();
+        UpdateWeaponsUpgrade();
+        UpdateFireRate();
     }
 
     void UpdateScore()
@@ -62,7 +88,43 @@ public class UIDisplay : MonoBehaviour
 
     void UpdateBoost()
     {
-        boostSlider.value = remainingDuration;
+        boostSlider.value = remainingBoostDuration;
+    }
+    
+    void UpdateShield()
+    {
+        shieldSlider.value = remainingShieldDuration;
+    }
+    
+    void UpdateWeaponsUpgrade()
+    {
+        weaponsUpgradeSlider.value = playerShooter.GetCurrentUpgradeProgress();
+    }
+
+    public void UpdateWeaponsUpgradeSlider(int value)
+    {
+        weaponsUpgradeSlider.maxValue = value;
+    }
+
+    public void DisableWeaponsUpgradeSlider()
+    {
+        weaponsUpgradePanel.SetActive(false);
+    }
+    
+    void UpdateFireRate()
+    {
+        fireRateSlider.value = playerShooter.GetProjectileSpeed();
+    }
+
+    void SetFireRateSlider(float min, float max)
+    {
+        fireRateSlider.minValue = min;
+        fireRateSlider.maxValue = max;
+    }
+
+    public void DisableFireRateSlider()
+    {
+        fireRatePanel.SetActive(false);
     }
 
     public void DisplayBoost()
@@ -73,14 +135,33 @@ public class UIDisplay : MonoBehaviour
     IEnumerator BoostCountdown()
     {
         boostPanel.SetActive(true);
-        remainingDuration = boostPickup.GetValue();
+        remainingBoostDuration = boostPickup.GetValue();
         
-        while (remainingDuration > 0)
+        while (remainingBoostDuration > 0)
         {
-            remainingDuration -= Time.deltaTime;
+            remainingBoostDuration -= Time.deltaTime;
             yield return null;
         }
 
         boostPanel.SetActive(false);
+    }
+    
+    public void DisplayShield()
+    {
+        StartCoroutine(ShieldCountdown());
+    }
+
+    IEnumerator ShieldCountdown()
+    {
+        shieldPanel.SetActive(true);
+        remainingShieldDuration = shieldPickup.GetValue();
+        
+        while (remainingShieldDuration > 0)
+        {
+            remainingShieldDuration -= Time.deltaTime;
+            yield return null;
+        }
+
+        shieldPanel.SetActive(false);
     }
 }

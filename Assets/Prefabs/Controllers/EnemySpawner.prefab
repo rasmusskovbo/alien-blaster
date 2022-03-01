@@ -55,13 +55,15 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ab14d98f0d5b91f4da489eec64902d0c, type: 2}
   - {fileID: 11400000, guid: 60f46d0cea26ad143b50f4ae4a7f27e7, type: 2}
   - {fileID: 11400000, guid: 04485ee77fbb84bbabb6e3615a450f40, type: 2}
+  - {fileID: 11400000, guid: 2874784f6353b184187602e02f3ac1dd, type: 2}
   timeBetweenWaves: 2
   isLooping: 1
-  maxAmountOfSpawners: 4
+  maxAmountOfSpawners: 20
   timeBetweenExtraSpawners: 40
   bossConfigs:
   - {fileID: 11400000, guid: b2784a0b36b89e34f8113b892df49601, type: 2}
   - {fileID: 11400000, guid: f82c6a0c46949d84ca8d333d648cf63a, type: 2}
-  timeBetweenBossSpawns: 16
-  bossSpawnIncrement: 2
-  minimumTimeBetweenBossSpawns: 10
+  - {fileID: 11400000, guid: 58560561e39cd2949b061a76fdc03591, type: 2}
+  timeBetweenBossSpawns: 15
+  bossSpawnIncrement: 1
+  minimumTimeBetweenBossSpawns: 0
