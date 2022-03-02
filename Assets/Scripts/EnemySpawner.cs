@@ -9,6 +9,7 @@ public class EnemySpawner : MonoBehaviour
     [Header("Waves")]
     [SerializeField] private List<WaveConfigSO> waveConfigs;
     [SerializeField] private float timeBetweenWaves = 2;
+    [SerializeField] private int maxTimeBetweenWaves = 10;
     [SerializeField] private bool isLooping = true;
     [SerializeField] private int maxAmountOfSpawners = 5;
     [SerializeField] private int timeBetweenExtraSpawners = 30;
@@ -19,6 +20,14 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private float bossSpawnIncrement = 10f;
     [SerializeField] private float minimumTimeBetweenBossSpawns = 5f;
 
+    [Header("Difficulty")]
+    [SerializeField] private int difficultyCounter;
+    [SerializeField] private int spawnExtraBossesAtWaveCount;
+    [SerializeField] private int upgradeEnemiesAtWaveCount;
+    [SerializeField] private GameObject upgradedEnemyPrefab;
+    private bool upgradeEnemies = false;
+    
+    
     private int waveCounter;
     
     void Start()
@@ -38,13 +47,25 @@ public class EnemySpawner : MonoBehaviour
 
             for (int i = 0; i < wave.GetEnemyCount(); i++)
             {
-                Instantiate(
-                    wave.GetEnemyPrefab(i),
-                    wave.GetStartingWaypoint().position,
-                    Quaternion.Euler(0, 0, 180),
-                    transform
-                ).GetComponent<Pathfinder>().SetCurrentWave(wave);
-
+                if (!upgradeEnemies)
+                {
+                    Instantiate(
+                        wave.GetEnemyPrefab(i),
+                        wave.GetStartingWaypoint().position,
+                        Quaternion.Euler(0, 0, 180),
+                        transform
+                    ).GetComponent<Pathfinder>().SetCurrentWave(wave); 
+                }
+                else
+                {
+                    Instantiate(
+                        upgradedEnemyPrefab,
+                        wave.GetStartingWaypoint().position,
+                        Quaternion.Euler(0, 0, 180),
+                        transform
+                    ).GetComponent<Pathfinder>().SetCurrentWave(wave); 
+                }
+                
                 waveCounter++;
                 
                 yield return new WaitForSeconds(wave.getRandomSpawnTime());
@@ -103,16 +124,32 @@ public class EnemySpawner : MonoBehaviour
 
     IEnumerator ScaleDifficulty()
     {
-        int counter = 0;
-
-        while (counter < maxAmountOfSpawners)
+        while (difficultyCounter < maxAmountOfSpawners)
         {
+            Debug.Log("Difficulty level: " + difficultyCounter);
             yield return new WaitForSeconds(timeBetweenExtraSpawners);
-            if (timeBetweenWaves < maxAmountOfSpawners) timeBetweenWaves++;
+            
+            if (timeBetweenWaves < maxTimeBetweenWaves) timeBetweenWaves++;
             if (timeBetweenBossSpawns > minimumTimeBetweenBossSpawns) timeBetweenBossSpawns -= bossSpawnIncrement;
-            counter++;
+            difficultyCounter++;
+            
             StartCoroutine(RandomWaveSpawner());
+            
+            if (difficultyCounter == spawnExtraBossesAtWaveCount)
+            {
+                StartCoroutine(BossSpawner());
+                Debug.Log("Spawning extra boss");
+            }
+
+            if (difficultyCounter >= upgradeEnemiesAtWaveCount)
+            {
+                Debug.Log("Enemies upgraded");
+                upgradeEnemies = true;
+            }
+            
         }
+        
+        
         
     }
     
