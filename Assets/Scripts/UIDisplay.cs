@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using TMPro;
+using Unity.VisualScripting;
+using UnityEditor.Animations;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -33,6 +35,14 @@ public class UIDisplay : MonoBehaviour
     [Header("Fire Rate")] 
     [SerializeField] private GameObject fireRatePanel;
     [SerializeField] private Slider fireRateSlider;
+
+    [Header("Sidebar")] 
+    [SerializeField] private TextMeshProUGUI waveDisplay;
+    [SerializeField] private TextMeshProUGUI difficultyDisplay;
+
+    [Header("Announcement")] 
+    [SerializeField] private TextMeshProUGUI announcementText;
+    [SerializeField] private AnimatorController animatorController;
 
     private ScoreKeeper _scoreKeeper;
 
@@ -114,6 +124,16 @@ public class UIDisplay : MonoBehaviour
     void UpdateFireRate()
     {
         fireRateSlider.value = playerShooter.GetProjectileSpeed();
+    }
+
+    public void UpdateWaveCounter(int value)
+    {
+        waveDisplay.text = value.ToString();
+    }
+    
+    public void UpdateDifficultyCounter(int value)
+    {
+        difficultyDisplay.text = value.ToString();
     }
 
     void SetFireRateSlider(float min, float max)

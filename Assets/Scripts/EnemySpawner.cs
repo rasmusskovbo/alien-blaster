@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -26,13 +25,15 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private int upgradeEnemiesAtWaveCount;
     [SerializeField] private GameObject upgradedEnemyPrefab;
     private bool upgradeEnemies = false;
-    
-    
+
+    private UIDisplay _uiDisplay;
     private int waveCounter;
     
     void Start()
     {
         waveCounter = 0;
+        _uiDisplay = FindObjectOfType<UIDisplay>();
+        _uiDisplay.UpdateDifficultyCounter(difficultyCounter);
         StartCoroutine(RandomWaveSpawner());
         StartCoroutine(BossSpawner());
         StartCoroutine(ScaleDifficulty());
@@ -44,6 +45,9 @@ public class EnemySpawner : MonoBehaviour
         {
             int randomIndex = Random.Range(0, waveConfigs.Count);
             WaveConfigSO wave = waveConfigs[randomIndex];
+            
+            waveCounter++;
+            _uiDisplay.UpdateWaveCounter(waveCounter);
 
             for (int i = 0; i < wave.GetEnemyCount(); i++)
             {
@@ -66,11 +70,9 @@ public class EnemySpawner : MonoBehaviour
                     ).GetComponent<Pathfinder>().SetCurrentWave(wave); 
                 }
                 
-                waveCounter++;
-                
                 yield return new WaitForSeconds(wave.getRandomSpawnTime());
             }
-
+            
             yield return new WaitForSeconds(timeBetweenWaves);
             
         } while (isLooping);
@@ -132,7 +134,7 @@ public class EnemySpawner : MonoBehaviour
             if (timeBetweenWaves < maxTimeBetweenWaves) timeBetweenWaves++;
             if (timeBetweenBossSpawns > minimumTimeBetweenBossSpawns) timeBetweenBossSpawns -= bossSpawnIncrement;
             difficultyCounter++;
-            
+            _uiDisplay.UpdateDifficultyCounter(difficultyCounter);
             StartCoroutine(RandomWaveSpawner());
             
             if (difficultyCounter == spawnExtraBossesAtWaveCount)
