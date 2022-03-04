@@ -42,15 +42,17 @@ public class UIDisplay : MonoBehaviour
 
     [Header("Announcement")] 
     [SerializeField] private TextMeshProUGUI announcementText;
-    [SerializeField] private AnimatorController animatorController;
+    private Animator _animator;
 
     private ScoreKeeper _scoreKeeper;
+    private static readonly int shouldDisplayText = Animator.StringToHash("displayText");
 
     private void Awake()
     {
         _scoreKeeper = FindObjectOfType<ScoreKeeper>();
         boostPanel.SetActive(false);
         shieldPanel.SetActive(false);
+        _animator = announcementText.GetComponent<Animator>();
     }
 
     private void Start()
@@ -74,6 +76,19 @@ public class UIDisplay : MonoBehaviour
         UpdateShield();
         UpdateWeaponsUpgrade();
         UpdateFireRate();
+    }
+
+    public void DisplayText(String value)
+    {
+        StartCoroutine(AnnounceCoroutine(value));
+    }
+
+    IEnumerator AnnounceCoroutine(String value)
+    {
+        announcementText.text = value;
+        _animator.SetBool(shouldDisplayText, true);
+        yield return new WaitForSeconds(1);
+        _animator.SetBool(shouldDisplayText, false);
     }
 
     void UpdateScore()

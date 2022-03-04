@@ -6,10 +6,12 @@ public class Pickup : MonoBehaviour
     [SerializeField] private string type;
     [SerializeField] private float value;
 
+    private UIDisplay _uiDisplay;
     private AudioPlayer _audioPlayer;
 
     private void Awake()
     {
+        _uiDisplay = FindObjectOfType<UIDisplay>();
         _audioPlayer = FindObjectOfType<AudioPlayer>();
     }
 
@@ -21,6 +23,7 @@ public class Pickup : MonoBehaviour
         {
             col.GetComponent<Health>().Heal(value);
             _audioPlayer.PlayPickupSFX();
+            _uiDisplay.DisplayText("HP UP!");
             Destroy(gameObject);
         }
         
@@ -28,6 +31,7 @@ public class Pickup : MonoBehaviour
         {
             col.GetComponent<Shooter>().IncreaseFiringRate();
             _audioPlayer.PlayPickupSFX();
+            _uiDisplay.DisplayText("FIRE RATE UP!");
             Destroy(gameObject);
         }
         
@@ -35,22 +39,25 @@ public class Pickup : MonoBehaviour
         {
             col.GetComponent<Shooter>().IncreaseWeaponsUpgrade();
             _audioPlayer.PlayPickupSFX();
+            _uiDisplay.DisplayText("WEAPONS UP!");
             Destroy(gameObject);
         }
         
         if (type.Equals("BOOST"))
         {
             col.GetComponent<Shooter>().ActivateBoost(value);
-            FindObjectOfType<UIDisplay>().DisplayBoost();
+            _uiDisplay.DisplayBoost();
             _audioPlayer.PlayBoostSFX();
+            _uiDisplay.DisplayText("BOOST ACTIVATED");
             Destroy(gameObject);
         }
         
         if (type.Equals("SHIELD"))
         {
             col.GetComponent<Health>().ActivateShield(value);
-            FindObjectOfType<UIDisplay>().DisplayShield();
+            _uiDisplay.DisplayShield();
             _audioPlayer.PlayOnForceFieldHitSFX();
+            _uiDisplay.DisplayText("SHIELD ACTIVATED");
             Destroy(gameObject);
         }
     }

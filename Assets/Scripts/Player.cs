@@ -15,6 +15,11 @@ public class Player : MonoBehaviour
     [SerializeField] float paddingBottom;
     [SerializeField] float paddingTop;
 
+    [Header("Animation")] 
+    private Animator _animator;
+    private static readonly int MovingRight = Animator.StringToHash("movingRight");
+    private static readonly int MovingLeft = Animator.StringToHash("movingLeft");
+    
     private Vector2 inputDirection;
     private Vector2 minBounds;
     private Vector2 maxBounds;
@@ -23,6 +28,7 @@ public class Player : MonoBehaviour
 
     private void Awake()
     {
+        _animator = GetComponent<Animator>();
         shooter = GetComponent<Shooter>();
         gameObject.GetComponent<Shield>();
     }
@@ -41,6 +47,22 @@ public class Player : MonoBehaviour
     void OnMove(InputValue value)
     {
         inputDirection = value.Get<Vector2>();
+        if (inputDirection.Equals(Vector2.left))
+        {
+            _animator.SetBool(MovingLeft, true);
+        }
+        else if (inputDirection.Equals(Vector2.right))
+        {
+            _animator.SetBool(MovingRight, true);
+        }
+        else
+        {
+            _animator.SetBool(MovingLeft, false);
+            _animator.SetBool(MovingRight, false);
+        }
+        
+            
+        
     }
     
     private void UpdatePlayerPosition()

@@ -480,11 +480,16 @@ public class Shooter : MonoBehaviour
     {
         if (currentUpgradeProgress >= upgradesRequiredPerTier)
         {
+            FindObjectOfType<UIDisplay>().DisplayText("WEAPONS UPGRADED");
             currentUpgradeProgress = 0;
             upgradesRequiredPerTier += upgradeScaling;
             FindObjectOfType<UIDisplay>().UpdateWeaponsUpgradeSlider(upgradesRequiredPerTier);
             _audioPlayer.PlayWeaponsTierUpgradeSFX();
             UpgradeWeaponsTier();
+        }
+        else
+        {
+            FindObjectOfType<UIDisplay>().DisplayText("GODLIKE");
         }
     }
 

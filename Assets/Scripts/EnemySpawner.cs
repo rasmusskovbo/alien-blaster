@@ -135,17 +135,20 @@ public class EnemySpawner : MonoBehaviour
             if (timeBetweenBossSpawns > minimumTimeBetweenBossSpawns) timeBetweenBossSpawns -= bossSpawnIncrement;
             difficultyCounter++;
             _uiDisplay.UpdateDifficultyCounter(difficultyCounter);
+            _uiDisplay.DisplayText("DIFFICULTY UP");
             StartCoroutine(RandomWaveSpawner());
             
             if (difficultyCounter == spawnExtraBossesAtWaveCount)
             {
                 StartCoroutine(BossSpawner());
                 Debug.Log("Spawning extra boss");
+                _uiDisplay.DisplayText("UFO OVERFLOW");
             }
 
             if (difficultyCounter >= upgradeEnemiesAtWaveCount)
             {
                 Debug.Log("Enemies upgraded");
+                _uiDisplay.DisplayText("SUDDEN DEATH");
                 upgradeEnemies = true;
             }
             
