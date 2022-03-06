@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class LevelManager : MonoBehaviour
 {
     [SerializeField] private float sceneLoadDelay = 2f;
-    
+
     public void LoadGame()
     {
         ScoreKeeper scoreKeeper = FindObjectOfType<ScoreKeeper>();

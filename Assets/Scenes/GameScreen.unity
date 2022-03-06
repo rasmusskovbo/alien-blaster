@@ -1217,6 +1217,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -3772805983128130773, guid: e181f69975fd54fcebe76dba476e8f73, type: 3}
+      propertyPath: isUnkillable
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 478775748640048807, guid: e181f69975fd54fcebe76dba476e8f73, type: 3}
       propertyPath: m_Name
       value: Player
@@ -1425,6 +1429,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 688329173376082466, guid: 5b69a7080e2e6444ebceb968d8ecf5d7, type: 3}
+      propertyPath: finalEnemyPrefab
+      value: 
+      objectReference: {fileID: 4312365996676449754, guid: 9c11fc4bbe73c544ba51aea37b43fc74, type: 3}
+    - target: {fileID: 688329173376082466, guid: 5b69a7080e2e6444ebceb968d8ecf5d7, type: 3}
       propertyPath: difficultyCounter
       value: 0
       objectReference: {fileID: 0}
@@ -1441,16 +1449,36 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 4312365996676449754, guid: 42f4ad33d073d41438c53eed118facf6, type: 3}
     - target: {fileID: 688329173376082466, guid: 5b69a7080e2e6444ebceb968d8ecf5d7, type: 3}
+      propertyPath: bossConfigs.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 688329173376082466, guid: 5b69a7080e2e6444ebceb968d8ecf5d7, type: 3}
+      propertyPath: finalEnemiesAtWaveCount
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 688329173376082466, guid: 5b69a7080e2e6444ebceb968d8ecf5d7, type: 3}
       propertyPath: timeBetweenExtraSpawners
       value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 688329173376082466, guid: 5b69a7080e2e6444ebceb968d8ecf5d7, type: 3}
+      propertyPath: bossConfigs.Array.data[3]
+      value: 
+      objectReference: {fileID: 11400000, guid: 34f0fe3c8f9c6534689f973d88bd7e7f, type: 2}
+    - target: {fileID: 688329173376082466, guid: 5b69a7080e2e6444ebceb968d8ecf5d7, type: 3}
+      propertyPath: bossConfigs.Array.data[4]
+      value: 
+      objectReference: {fileID: 11400000, guid: 0f26c11b682d86b458e163b2cacb922f, type: 2}
+    - target: {fileID: 688329173376082466, guid: 5b69a7080e2e6444ebceb968d8ecf5d7, type: 3}
+      propertyPath: bossConfigs.Array.data[5]
+      value: 
+      objectReference: {fileID: 11400000, guid: a0f52606cba5c9a488f4e2b7df2e9c80, type: 2}
+    - target: {fileID: 688329173376082466, guid: 5b69a7080e2e6444ebceb968d8ecf5d7, type: 3}
       propertyPath: upgradeEnemiesAtWaveCount
-      value: 15
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 688329173376082466, guid: 5b69a7080e2e6444ebceb968d8ecf5d7, type: 3}
       propertyPath: spawnExtraBossesAtWaveCount
-      value: 10
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 688329173376082467, guid: 5b69a7080e2e6444ebceb968d8ecf5d7, type: 3}
       propertyPath: m_Name

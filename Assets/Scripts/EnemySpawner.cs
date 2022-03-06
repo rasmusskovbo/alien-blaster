@@ -23,8 +23,10 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private int difficultyCounter;
     [SerializeField] private int spawnExtraBossesAtWaveCount;
     [SerializeField] private int upgradeEnemiesAtWaveCount;
+    [SerializeField] private int finalEnemiesAtWaveCount;
     [SerializeField] private GameObject upgradedEnemyPrefab;
-    private bool upgradeEnemies = false;
+    [SerializeField] private GameObject finalEnemyPrefab;
+    private int enemyLevel = 0;
 
     private UIDisplay _uiDisplay;
     private int waveCounter;
@@ -51,7 +53,7 @@ public class EnemySpawner : MonoBehaviour
 
             for (int i = 0; i < wave.GetEnemyCount(); i++)
             {
-                if (!upgradeEnemies)
+                if (enemyLevel == 0)
                 {
                     Instantiate(
                         wave.GetEnemyPrefab(i),
@@ -60,10 +62,19 @@ public class EnemySpawner : MonoBehaviour
                         transform
                     ).GetComponent<Pathfinder>().SetCurrentWave(wave); 
                 }
-                else
+                else if (enemyLevel == 1)
                 {
                     Instantiate(
                         upgradedEnemyPrefab,
+                        wave.GetStartingWaypoint().position,
+                        Quaternion.Euler(0, 0, 180),
+                        transform
+                    ).GetComponent<Pathfinder>().SetCurrentWave(wave); 
+                }
+                else if (enemyLevel == 2)
+                {
+                    Instantiate(
+                        finalEnemyPrefab,
                         wave.GetStartingWaypoint().position,
                         Quaternion.Euler(0, 0, 180),
                         transform
@@ -97,33 +108,6 @@ public class EnemySpawner : MonoBehaviour
         } while (true);
     }
     
-    /*
-    void IncreaseDifficulty()
-    {
-        // Decrease time between all wave spawners
-        if (timeBetweenWaves > 0)
-        {
-            timeBetweenWaves--;
-            Mathf.Clamp(timeBetweenWaves, 0, Int32.MaxValue);
-        }
-        
-        // Increase frequency of extra wave spawners
-        if (delayBetweenExtraWaves > 10)
-        {
-            delayBetweenExtraWaves -= 10;
-            Mathf.Clamp(delayBetweenExtraWaves, 0, Int32.MaxValue);
-        }
-        else if (delayBetweenExtraWaves >= 1)
-        {
-            delayBetweenExtraWaves--;
-            Mathf.Clamp(delayBetweenExtraWaves, 0, Int32.MaxValue);
-        }
-
-        // Add wave spawner ever reset
-        StartCoroutine(SecondSpawner());
-    }
-    */
-
     IEnumerator ScaleDifficulty()
     {
         while (difficultyCounter < maxAmountOfSpawners)
@@ -141,15 +125,23 @@ public class EnemySpawner : MonoBehaviour
             if (difficultyCounter == spawnExtraBossesAtWaveCount)
             {
                 StartCoroutine(BossSpawner());
+                FindObjectOfType<AudioPlayer>().DisableLaserSounds();
                 Debug.Log("Spawning extra boss");
                 _uiDisplay.DisplayText("UFO OVERFLOW");
             }
 
-            if (difficultyCounter >= upgradeEnemiesAtWaveCount)
+            if (difficultyCounter >= upgradeEnemiesAtWaveCount && enemyLevel < 1)
+            {
+                Debug.Log("Enemies upgraded");
+                _uiDisplay.DisplayText("MASSIVE ATTACK");
+                enemyLevel = 1;
+            }
+            
+            if (difficultyCounter >= finalEnemiesAtWaveCount)
             {
                 Debug.Log("Enemies upgraded");
                 _uiDisplay.DisplayText("SUDDEN DEATH");
-                upgradeEnemies = true;
+                enemyLevel = 2;
             }
             
         }

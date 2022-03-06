@@ -1,4 +1,5 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Health : MonoBehaviour
@@ -9,6 +10,7 @@ public class Health : MonoBehaviour
     [SerializeField] private ParticleSystem hitEffect;
     [SerializeField] private bool applyCameraShake;
     [SerializeField] private Shield shield;
+    private bool isGodModeActivated;
     
     private CameraShake _cameraShake;
     private AudioPlayer _audioPlayer;
@@ -23,13 +25,23 @@ public class Health : MonoBehaviour
         _levelManager = FindObjectOfType<LevelManager>();
     }
 
+    private void Start()
+    {
+        if (applyCameraShake)
+        {
+            Debug.Log("God mode rn: " + isGodModeActivated);
+            isGodModeActivated = _audioPlayer.GetGodModeSetting();
+            Debug.Log("God mode after: " +isGodModeActivated);
+        }
+    }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         DamageDealer damageDealer = other.GetComponent<DamageDealer>();
         
         if (damageDealer)
         {
-            if (shield && shield.isActive())
+            if ((shield && shield.isActive()) || isGodModeActivated)
             {
                 _audioPlayer.PlayOnForceFieldHitSFX();
             }

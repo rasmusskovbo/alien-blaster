@@ -26,11 +26,17 @@ public class AudioPlayer : MonoBehaviour
     [SerializeField] private AudioClip weaponsTierUpgradeSFX;
     [SerializeField] [Range(0f, 1f)] private float weaponsTierUpgradeSFXVolume = 0.25f;
 
+    // God mode in this class is a hack and should not be here - just finishing up project.
+    private bool isAudioEnabled = true;
+    private bool isLaserSoundsEnabled = true;
+    private bool isGodModeEnabled;
+    
     // Static instancess version of Singleton pattern
     private static AudioPlayer instance;
     
     private void Awake()
     {
+        if (isAudioEnabled) GetComponent<AudioSource>().Play();
         ManageSingleton();
     }
 
@@ -41,7 +47,7 @@ public class AudioPlayer : MonoBehaviour
          * if (instanceCount > 1)
          */
 
-        if (instance != null)
+        if (instance != null && isAudioEnabled)
         {
             gameObject.SetActive(false);
             Destroy(gameObject);
@@ -50,6 +56,20 @@ public class AudioPlayer : MonoBehaviour
         {
             instance = this;
             DontDestroyOnLoad(gameObject);
+        }
+    }
+
+    public void SetAudio()
+    {
+        isAudioEnabled = !isAudioEnabled;
+        AudioSource theme = GetComponent<AudioSource>();
+        if (theme.isPlaying)
+        {
+            theme.Stop();
+        }
+        else
+        {
+            theme.Play();
         }
     }
 
@@ -62,7 +82,7 @@ public class AudioPlayer : MonoBehaviour
 
     public void PlayShootingFX()
     {
-        if (shootingSFX != null)
+        if (shootingSFX != null && isAudioEnabled && isLaserSoundsEnabled)
         {
             AudioSource.PlayClipAtPoint(
                 shootingSFX, 
@@ -74,7 +94,7 @@ public class AudioPlayer : MonoBehaviour
     
     public void PlayEnemyShootingFX()
     {
-        if (enemyShootingSFX != null)
+        if (enemyShootingSFX != null && isAudioEnabled && isLaserSoundsEnabled)
         {
             AudioSource.PlayClipAtPoint(
                 enemyShootingSFX, 
@@ -86,7 +106,7 @@ public class AudioPlayer : MonoBehaviour
 
     public void PlayOnHitSFX()
     {
-        if (onHitSFX != null)
+        if (onHitSFX != null && isAudioEnabled && isLaserSoundsEnabled)
         {
             AudioSource.PlayClipAtPoint(
                 onHitSFX, 
@@ -98,7 +118,7 @@ public class AudioPlayer : MonoBehaviour
     
     public void PlayOnForceFieldHitSFX()
     {
-        if (onForceFieldHitSFX != null)
+        if (onForceFieldHitSFX != null && isAudioEnabled)
         {
             AudioSource.PlayClipAtPoint(
                 onForceFieldHitSFX, 
@@ -110,7 +130,7 @@ public class AudioPlayer : MonoBehaviour
 
     public void PlayPlayerDestroySFX()
     {
-        if (playerDestroyedSFX != null)
+        if (playerDestroyedSFX != null && isAudioEnabled)
         {
             AudioSource.PlayClipAtPoint(
                 playerDestroyedSFX, 
@@ -122,7 +142,7 @@ public class AudioPlayer : MonoBehaviour
     
     public void PlayEnemyDestroySFX()
     {
-        if (enemyDestroyedSFX != null)
+        if (enemyDestroyedSFX != null && isAudioEnabled)
         {
             AudioSource.PlayClipAtPoint(
                 enemyDestroyedSFX, 
@@ -134,7 +154,7 @@ public class AudioPlayer : MonoBehaviour
 
     public void PlayPickupSFX()
     {
-        if (pickupSFX != null)
+        if (pickupSFX != null && isAudioEnabled)
         {
             AudioSource.PlayClipAtPoint(
                 pickupSFX, 
@@ -146,7 +166,7 @@ public class AudioPlayer : MonoBehaviour
     
     public void PlayBoostSFX()
     {
-        if (boostSFX != null)
+        if (boostSFX != null && isAudioEnabled)
         {
             AudioSource.PlayClipAtPoint(
                 boostSFX, 
@@ -158,7 +178,7 @@ public class AudioPlayer : MonoBehaviour
     
     public void PlayWeaponsTierUpgradeSFX()
     {
-        if (weaponsTierUpgradeSFX != null)
+        if (weaponsTierUpgradeSFX != null && isAudioEnabled)
         {
             AudioSource.PlayClipAtPoint(
                 weaponsTierUpgradeSFX, 
@@ -166,5 +186,22 @@ public class AudioPlayer : MonoBehaviour
                 weaponsTierUpgradeSFXVolume
             );
         }
+    }
+
+    public void DisableLaserSounds()
+    {
+        isLaserSoundsEnabled = false;
+    }
+    
+    public bool GetGodModeSetting()
+    {
+        Debug.Log("Returning God mode" + isGodModeEnabled);
+        return isGodModeEnabled;
+    }
+
+    public void ToggleGodMode()
+    {
+        isGodModeEnabled = !isGodModeEnabled;
+        Debug.Log("God mode" + isGodModeEnabled);
     }
 }
